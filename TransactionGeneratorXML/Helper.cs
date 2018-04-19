@@ -78,15 +78,15 @@ namespace TransactionGeneratorXML
             // TODO getrandomNumber link to the stockPositionCapacity
             int quantity = 0;
             var weekdayName = startDate.DayOfWeek.ToString();
-            var year = startDate.Year.ToString();
+            var year = startDate.Year;
 
-            if (weekdayName == "Monday") quantity = year == "2016" ? GetRandomNumber(30, 50) : year == "2017" ? (int)(GetRandomNumber(25, 50) * 1.10) : (int)(GetRandomNumber(30, 50) * 1.20);
-            if (weekdayName == "Tuesday") quantity = year == "2016" ? GetRandomNumber(50, 80) : year == "2017" ? (int)(GetRandomNumber(45, 80) * 1.10) : (int)(GetRandomNumber(50, 80) * 1.20);
-            if (weekdayName == "Wednesday") quantity = year == "2016" ? GetRandomNumber(100, 200) : year == "2017" ? (int)(GetRandomNumber(130, 200) * 1.10) : (int)(GetRandomNumber(100, 200) * 1.20);
-            if (weekdayName == "Thursday") quantity = year == "2016" ? GetRandomNumber(70, 90) : year == "2017" ? (int)(GetRandomNumber(65, 90) * 1.10) : (int)(GetRandomNumber(70, 90) * 1.20);
-            if (weekdayName == "Friday") quantity = year == "2016" ? GetRandomNumber(140, 180) : year == "2017" ? (int)(GetRandomNumber(145, 180) * 1.10) : (int)(GetRandomNumber(140, 180) * 1.20);
-            if (weekdayName == "Saturday") quantity = year == "2016" ? GetRandomNumber(220, 280) : year == "2017" ? (int)(GetRandomNumber(220, 265) * 1.10) : (int)(GetRandomNumber(220, 280) * 1.20);
-            if (weekdayName == "Sunday") quantity = year == "2016" ? GetRandomNumber(120, 170) : year == "2017" ? (int)(GetRandomNumber(120, 170) * 1.10) : (int)(GetRandomNumber(120, 170) * 1.20);
+            if (weekdayName == "Monday") quantity = year == 2016 ? GetRandomNumber(30, 50) : year == 2017 ? (int)(GetRandomNumber(30, 50) * 1.10) : (int)(GetRandomNumber(30, 50) * 1.20);
+            if (weekdayName == "Tuesday") quantity = year == 2016 ? GetRandomNumber(50, 80) : year == 2017 ? (int)(GetRandomNumber(50, 80) * 1.10) : (int)(GetRandomNumber(50, 80) * 1.20);
+            if (weekdayName == "Wednesday") quantity = year == 2016 ? GetRandomNumber(100, 200) : year == 2017 ? (int)(GetRandomNumber(100, 200) * 1.10) : (int)(GetRandomNumber(100, 200) * 1.20);
+            if (weekdayName == "Thursday") quantity = year == 2016 ? GetRandomNumber(70, 90) : year == 2017 ? (int)(GetRandomNumber(70, 90) * 1.10) : (int)(GetRandomNumber(70, 90) * 1.20);
+            if (weekdayName == "Friday") quantity = year == 2016 ? GetRandomNumber(140, 180) : year == 2017 ? (int)(GetRandomNumber(145, 180) * 1.10) : (int)(GetRandomNumber(140, 180) * 1.20);
+            if (weekdayName == "Saturday") quantity = year == 2016 ? GetRandomNumber(220, 280) : year == 2017 ? (int)(GetRandomNumber(220, 280) * 1.10) : (int)(GetRandomNumber(220, 280) * 1.20);
+            if (weekdayName == "Sunday") quantity = year == 2016 ? GetRandomNumber(120, 170) : year == 2017 ? (int)(GetRandomNumber(120, 170) * 1.10) : (int)(GetRandomNumber(120, 170) * 1.20);
 
             return quantity;
         }

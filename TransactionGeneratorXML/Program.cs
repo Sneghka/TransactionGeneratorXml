@@ -19,6 +19,8 @@ namespace TransactionGeneratorXML
             var converter = new Converter();
 
             converter.CreateTransactions(cashPointNumber, startDate, endDate, pathFolder);
+
+            Console.ReadKey();
          
         }
     }

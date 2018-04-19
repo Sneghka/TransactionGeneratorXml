@@ -29,7 +29,21 @@ namespace TransactionGeneratorXML.Model
         public int Quantity { get; set; }
 
         [XmlElement(ElementName = "MaterialID", Order = 7)]
-        public string MaterialID { get; set; } 
+        public string MaterialID { get; set; }
+
+
+        public TransactionLine() { }
+
+        public TransactionLine(StockPosition stockPosition, string transactionLineType, string stockPositionDirection, DateTime startDate, bool isStockTransactionRequired)
+        {
+            TransactionLineType = transactionLineType;
+            StockPositionDirection = stockPositionDirection;
+            CassetteNumber = stockPosition.CassetteNumber;
+            CassetteExternalNumber = stockPosition.CassetteExternalNumber;
+            IsMixed = "no";
+            Quantity = isStockTransactionRequired == false ? Helper.GetRandomQuantity(startDate, stockPosition.Capacity) : stockPosition.Direction == 1 ? stockPosition.Capacity : stockPosition.Direction == 2 ? 0 : stockPosition.Capacity / 2;
+            MaterialID = stockPosition.MaterialId;
+        }
 
     }
 }
