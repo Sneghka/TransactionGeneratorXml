@@ -13,7 +13,7 @@ namespace TransactionGeneratorXML
     public class Converter
     {
 
-        public void CreateTransactions(string cashPointNumber, DateTime startDate, DateTime endDate, string pathFolder)
+        public void CreateTransactions(string cashPointNumber, DateTime startDate, DateTime endDate, string pathFolder, string dbConnection)
         {
 
             XmlSerializer s = new XmlSerializer(typeof(RootElement));
@@ -22,7 +22,7 @@ namespace TransactionGeneratorXML
 
             var rootElementList = new List<RootElement>();
             var generator = new DataGenerator();
-            generator.GenerateData(rootElementList, cashPointNumber, startDate, endDate);
+            generator.GenerateData(rootElementList, cashPointNumber, startDate, endDate, dbConnection);
             var timestamp = DateTime.UtcNow;
 
             foreach (var transaction in rootElementList)

@@ -41,70 +41,18 @@ namespace TransactionGeneratorXML.Model
         [XmlIgnore]
         public bool IsStockTransactionRequired { get; set; } = false;
 
-
         public Transaction() { }
-
-        public Transaction(List<StockPosition> stockPositionList, string cashPointNumber, DateTime startDate, bool isStockTransactionRequired = false)
+        public Transaction(string cashPointNumber, DateTime startDate, List<TransactionLine> transactionLinesList, bool isStockTransactionRequired = false)
         {
-            foreach (var position in stockPositionList)
-            {
-                int localQuantity = 0;
-
-                //if stock position direction = recycle then create two transaction lines 
-                if (position.Direction == 3)
-                {
-                    var transactionLineIssue = new TransactionLine(position, "issue", "recycle", startDate, isStockTransactionRequired);
-                    var transactionLineCollect = new TransactionLine(position, "collect", "recycle", startDate, isStockTransactionRequired);
-
-                    TransactionLinesList.Add(transactionLineIssue);
-                    if (!isStockTransactionRequired) TransactionLinesList.Add(transactionLineCollect);
-
-                    localQuantity = transactionLineCollect.Quantity - transactionLineIssue.Quantity;
-                    position.Quantity += localQuantity;
-                }
-                else
-                {
-                    var lineType = position.Direction == 1 ? "issue" : "collect"; // line type depends on stock position direction
-                    var direction = position.Direction == 1 ? "issue" : "collect";
-
-                    var transactionLine = new TransactionLine(position, lineType, direction, startDate, isStockTransactionRequired);
-                    TransactionLinesList.Add(transactionLine);
-
-                    localQuantity = transactionLine.Quantity;
-                    position.Quantity = position.Direction == 1 ? position.Quantity - localQuantity : position.Quantity + localQuantity;
-                }
-
-                if (isStockTransactionRequired == false)
-                {
-                    IsStockTransactionRequiredMethod(position, localQuantity);
-                }
-
-                else
-                {
-                    position.Quantity = position.Direction == 1 ? position.Capacity : position.Direction == 2 ? 0 : position.Capacity / 2;
-                }
-            }
-
-            var transactionQuantity = Helper.GetQuantityFromTransactionLinesList(TransactionLinesList);
             var startDateStock = startDate.AddDays(-1).AddSeconds(10).ToString("yyyy-MM-dd HH:mm:ss");
+            var transactionQuantity = Helper.GetQuantityFromTransactionLinesList(transactionLinesList);
 
             MachineNumber = cashPointNumber;
             StartDate = isStockTransactionRequired == false ? startDate.ToString("yyyy-MM-dd HH:mm:ss") : startDateStock;
             Quantity = transactionQuantity;
             Replenishment = "no";
-            TransactionType = isStockTransactionRequired == true ? "stock" : transactionQuantity >= 0 ? "issue" : "collect";
-        }
-
-        void IsStockTransactionRequiredMethod(StockPosition position, int localQuantity)
-        {
-            var cassetteQuantity = 0;           
-            if (position.Direction == 1 || position.Direction == 3) cassetteQuantity = position.Quantity - localQuantity;
-            if (position.Direction == 2 || position.Direction == 3) cassetteQuantity = position.Quantity + localQuantity;
-
-            if ((cassetteQuantity < 0 && (position.Direction == 1 || position.Direction == 3)) || (cassetteQuantity > position.Capacity && (position.Direction == 2 || position.Direction == 3)))
-            {
-                IsStockTransactionRequired = true;             
-            }          
-        }
+            TransactionType = isStockTransactionRequired == true ? "Stock" : transactionQuantity >= 0 ? "Issue" : "Collect";
+            TransactionLinesList = transactionLinesList;
+        }   
     }
 }

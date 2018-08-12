@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,6 +45,9 @@
   <ItemGroup>
     <Compile Include="Converter.cs" />
     <Compile Include="DataGenerator.cs" />
+    <Compile Include="Enums\Direction.cs" />
+    <Compile Include="Enums\TransactionLineType.cs" />
+    <Compile Include="Enums\TransactionType.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Model\StockPosition.cs" />
     <Compile Include="Model\TransactionLine.cs" />
