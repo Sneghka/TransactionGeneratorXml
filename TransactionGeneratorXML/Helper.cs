@@ -35,6 +35,7 @@ namespace TransactionGeneratorXML
         public static string connectionStrgLTF = "Data Source=portal;Initial Catalog=v5.03_SP3.LTF;Integrated Security=False;User ID=cwc-user2;Password=cwc-user2;Connection Timeout=60;";
         public static string connectionStrg_SC = "Data Source=portal;Initial Catalog=SC_v5.04_HQ;Integrated Security=False;User ID=cwc-user2;Password=cwc-user2;Connection Timeout=60;";
         public static string dbConnectionV06SP1 = "Data Source=portal;Initial Catalog=v6.01_SP1_HQ;Integrated Security=False;User ID=cwc-user2;Password=cwc-user2;Connection Timeout=60;";
+        public static string dbConnectionV503HQ = "Data Source=portal;Initial Catalog=Edsson_WebPortal_v5.03_HQ;Integrated Security=False;User ID=cwc-user2;Password=cwc-user2;Connection Timeout=60;";
 
         public static int GetRandomNumber(int min, int max)
         {
@@ -87,15 +88,15 @@ namespace TransactionGeneratorXML
                                 StockPositionId = reader.GetInt32(0),
                                 Direction = reader.GetInt32(1),
                                 Denomination = reader.IsDBNull(2) ? null : (decimal?)reader.GetDecimal(2),
-                                //Denomination = reader.GetDecimal(2),
+                                   //Denomination = reader.GetDecimal(2),
                                 CassetteNumber = reader.GetInt32(3),
-                                CassetteExternalNumber = reader.GetString(4),
+                                CassetteExternalNumber = reader.GetStringOrNull(4),
                                 Capacity = reader.GetInt32(5),
                                 MaterialId = reader.GetStringOrNull(6),
                                 ProductId = reader.GetStringOrNull(9),
-                                //MaterialId = reader.GetString(6) == null ? string.Empty : reader.GetString(6),
+                                    //MaterialId = reader.GetString(6) == null ? string.Empty : reader.GetString(6),
                                 Quantity = reader.GetInt32(8),
-                                //ProductId = reader.GetString(9) == null ? string.Empty : reader.GetString(9)
+                                    //ProductId = reader.GetString(9) == null ? string.Empty : reader.GetString(9)
                             };
 
 

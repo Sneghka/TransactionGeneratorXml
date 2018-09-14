@@ -59,11 +59,14 @@ namespace TransactionGeneratorXML.Model
                 {
 
                     Quantity = transactionLineType == Enums.TransactionLineType.Collect.ToString() ? Helper.GetRandomQuantityDistributionCollect(startDate) : Helper.GetRandomQuantityDistributionIssue(startDate);
+                if (stockPosition.MaterialId == null) Quantity = Quantity / 10;
+
                 }
                 else
                 {
                     Quantity = stockPosition.Direction == (int)Direction.Issue ? stockPosition.Capacity : stockPosition.Direction == (int)Direction.Collect ? 0 : stockPosition.Capacity / 2;
-                }
+                if (stockPosition.MaterialId == null) Quantity = Quantity / 10;
+            }
                 // Quantity = isStockTransactionRequired == false ? Helper.GetRandomQuantityDistribution(startDate, stockPosition) : stockPosition.Direction == (int)Direction.Issue ? stockPosition.Capacity : stockPosition.Direction == (int)Direction.Collect ? 0 : stockPosition.Capacity / 2;
                 MaterialID = stockPosition.MaterialId;
                 ProductID = stockPosition.ProductId;

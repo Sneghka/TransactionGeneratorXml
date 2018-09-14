@@ -36,7 +36,7 @@ namespace TransactionGeneratorXML
 
                     CreateTransactionLinesList(stockPositionList, startDate, ref isStockTransactionRequired, transactionLinesListForStock);
 
-                    var transactionStock = new Transaction(cashPointNumber, startDate, transactionLinesListForStock, true);
+                     var transactionStock = new Transaction(cashPointNumber, startDate, transactionLinesListForStock, true);
                     var rootElementStock = new RootElement();
 
                     rootElementStock.ValidatedFeeding.UnencryptedContent.Transaction = transactionStock;
